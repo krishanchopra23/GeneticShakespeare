@@ -3,6 +3,7 @@ int totalPopulation = 150;
 DNA[] population;
 ArrayList<DNA> matingPool;
 String target;
+int matchCount = 0;
 
 void setup() {
   size(800, 800);
@@ -59,6 +60,12 @@ void draw() {
       DNA partnerA = matingPool.get(a);
       DNA partnerB = matingPool.get(b);
       DNA child = partnerA.crossover(partnerB);
+      //add code for two unique parents
+      if (partnerA.getPhrase().equals(partnerA.getPhrase())) {
+        println("Partners are matching");
+        matchCount++;
+        partnerA = matingPool.get(a);
+      }
       child.mutate(mutationRate);
       population[i] = child;
    }
