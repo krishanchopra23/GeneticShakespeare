@@ -4,6 +4,9 @@ DNA[] population;
 ArrayList<DNA> matingPool;
 String target;
 int matchCount = 0;
+int totalGeneratedStrings = 0;
+float averageFitness;
+char [] bestString;
 
 void setup() {
   size(800, 800);
@@ -31,6 +34,8 @@ void draw() {
    background(255);
    frameRate(5);
    fill(0);
+   int bestFitness = 0;
+   averageFitness = 0;
    String words = "";
    for (int i = 0; i < population.length; i++) {
       words += population[i].getPhrase() + "     ";
@@ -68,6 +73,18 @@ void draw() {
       }
       child.mutate(mutationRate);
       population[i] = child;
+      child.fitness();
+      averageFitness += child.fitness;
+      
+      if (child.fitness > bestFitness) {
+         bestString = child.genes; 
+      }
    }
-   
+   totalGeneratedStrings++;
+   averageFitness = averageFitness / population.length;
+   text("Total Generations: " + totalGeneratedStrings, 50, 600);
+   text("Average Fitness: " + String.format("%.2f", averageFitness), 50, 650);
+   text("Total Population Size: " + population.length, 350, 600);
+   text("Best Phrase: " + new String(bestString), 350, 650);
+   //text("Mutation Rate: " + int(population[0].mutationRate * 100) + "%", 650, 700);
 }
