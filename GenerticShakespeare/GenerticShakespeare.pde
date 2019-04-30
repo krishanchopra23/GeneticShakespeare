@@ -52,6 +52,10 @@ void draw() {
    for (int i = 0; i < population.length; i++) {
       int a = int(random(matingPool.size()));
       int b = int(random(matingPool.size()));
+      //ensure unique random selection
+      while (a == b) {
+        b = int(random(matingPool.size())); 
+      }
       DNA partnerA = matingPool.get(a);
       DNA partnerB = matingPool.get(b);
       DNA child = partnerA.crossover(partnerB);

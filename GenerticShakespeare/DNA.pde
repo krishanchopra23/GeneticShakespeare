@@ -23,11 +23,18 @@ class DNA {
   //crossover function
   DNA crossover(DNA partner) {
     DNA child = new DNA();
-    int midpoint = int(random(genes.length));
+    //int midpoint = int(random(genes.length));
     
     for (int i = 0; i < genes.length; i++) {
-      if (i > midpoint) child.genes[i] = genes[i];
-      else child.genes[i] = partner.genes[i];
+      //if (i > midpoint) child.genes[i] = genes[i];
+      //else child.genes[i] = partner.genes[i];
+     //implement the coin flipping method
+      int geneSelection = int(random(0, 1));
+      if (geneSelection == 0) {
+         child.genes[i] = genes[i]; 
+      } else {
+         child.genes[i] = partner.genes[i]; 
+      }
     }
     return child;
   }
